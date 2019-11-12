@@ -6,12 +6,13 @@ import { searchAnime } from "./../utils/main";
 
 function PaperDropzone(props) {
   const onDrop = useCallback(acceptedFiles => {
-    const aniData = searchAnime(acceptedFiles); // one file always
-    props.props.history.push({
-      // TODO: why double props?
-      pathname: "/results",
-      state: { results: aniData }
-    });
+    var aniData = searchAnime(acceptedFiles); // one file always
+    console.log(aniData);
+    // props.props.history.push({
+    //   // TODO: why double props?
+    //   pathname: "/results",
+    //   state: { results: aniData }
+    // });
   });
 
   const { getRootProps, getInputProps } = useDropzone({

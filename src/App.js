@@ -2,6 +2,7 @@ import React from "react";
 import { TextField, Button } from "@material-ui/core";
 import "./App.css";
 import PaperDropzone from "./components/PaperDropzone";
+import LoadingSpinnerComponent from "./components/Spinner";
 
 function App(props) {
   return (
@@ -22,6 +23,7 @@ function App(props) {
           <Button variant="outlined" color="secondary">
             Submit
           </Button>
+          <LoadingSpinnerComponent />
         </div>
       </header>
     </div>

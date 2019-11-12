@@ -35,6 +35,7 @@ export function searchAnime(files) {
 
     return axios(`${TRACE_HOST_API_DOMAIN}${TRACE_SEARCH_QUERY_PATH}`, options)
       .then(res => {
+        // console.log(getSearchResultFromBinding(res.data));
         return getSearchResultFromBinding(res.data);
       })
       .catch(err => {
