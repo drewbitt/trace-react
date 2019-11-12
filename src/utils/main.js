@@ -8,46 +8,52 @@ const {
 const axios = require("axios");
 
 export function searchAnime(files) {
-  const reader = new FileReader();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
 
-  reader.onabort = () => console.log("file reading was aborted");
-  reader.onerror = () => console.log("file reading has failed");
-  reader.onload = () => {
-    // Rewriting whatanime-js to not use fs
+    reader.onabort = () => console.log("file reading was aborted");
+    reader.onerror = () => console.log("file reading has failed");
+    reader.onload = () => {
+      // Rewriting whatanime-js to not use fs
 
-    // File contents
-    const based = reader.result;
+      // File contents
+      const based = reader.result;
 
-    // Confirm size less than 10MB after converting to base64
-    const buffer = Buffer.from(based.substring(based.indexOf(",") + 1));
-    const bufferSize = Math.floor(buffer.length / 1024 ** 2 ** 2);
-    if (!bufferSize < 1) {
-      return Promise.reject(
-        new Error("You should ensure your Base64 encoded image is < 10MB")
-      );
-    }
+      // Confirm size less than 10MB after converting to base64
+      const buffer = Buffer.from(based.substring(based.indexOf(",") + 1));
+      const bufferSize = Math.floor(buffer.length / 1024 ** (2 ** 2));
+      if (!bufferSize < 1) {
+        return Promise.reject(
+          new Error("You should ensure your Base64 encoded image is < 10MB")
+        );
+      }
 
-    const options = {
-      method: "POST",
-      data: JSON.stringify({image: based}),
-      headers: { "Content-Type": "application/json" }
+      const options = {
+        method: "POST",
+        data: JSON.stringify({ image: based }),
+        headers: { "Content-Type": "application/json" }
+      };
+
+      return axios(
+        `${TRACE_HOST_API_DOMAIN}${TRACE_SEARCH_QUERY_PATH}`,
+        options
+      )
+        .then(res => {
+          // console.log(getSearchResultFromBinding(res.data));
+          resolve(getSearchResultFromBinding(res.data));
+        })
+        .catch(err => {
+          if (err.response) {
+            // TODO: need to reject, not just throw?
+            throw err.response.data;
+          } else {
+            throw err.message;
+          }
+        });
     };
 
-    return axios(`${TRACE_HOST_API_DOMAIN}${TRACE_SEARCH_QUERY_PATH}`, options)
-      .then(res => {
-        // console.log(getSearchResultFromBinding(res.data));
-        return getSearchResultFromBinding(res.data);
-      })
-      .catch(err => {
-        if (err.response) {
-          throw err.response.data;
-        } else {
-          throw err.message;
-        }
-      });
-  };
-
-  files.forEach(file => reader.readAsDataURL(file));
+    files.forEach(file => reader.readAsDataURL(file));
+  });
 }
 
 function SearchResult(
