@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import RootRef from "@material-ui/core/RootRef";
 import { Paper } from "@material-ui/core";
 import "./App.css";
+import { searchAnime } from "./utils/main";
 
 function App() {
   return (
@@ -18,10 +19,7 @@ function App() {
 
 function PaperDropzone() {
   const onDrop = useCallback(acceptedFiles => {
-    for (let file in acceptedFiles) {
-      // with multiple=false, is array of size 1
-      
-    }
+    searchAnime(acceptedFiles); // one file always
   });
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
