@@ -1,13 +1,12 @@
 import React from "react";
 
 class Results extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { results: null };
-  }
 
   render() {
-    return <h1>Hello</h1>;
+
+    return this.props.location.state.results ? this.props.location.state.results.docs.map(item => {
+      return <li>{item.title_english} - EP: {item.episode} - {item.imagepreview}</li>
+    }): <h1>No results</h1>;
   }
 }
 

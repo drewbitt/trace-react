@@ -7,15 +7,12 @@ import { trackPromise } from "react-promise-tracker";
 
 function PaperDropzone(props) {
   const onDrop = useCallback(acceptedFiles => {
-    var aniData = trackPromise(searchAnime(acceptedFiles)); // one file always
-    // TODO: correctly tracks promise with var, but does not wait,
-    // so executes the console.log and history push immediately
-    console.log(aniData);
-    // props.props.history.push({
-    //   // TODO: why double props?
-    //   pathname: "/results",
-    //   state: { results: aniData }
-    // });
+    trackPromise(
+      searchAnime(acceptedFiles).then(res => {
+        console.log(res);
+        props.props.history.push("/results", { results: res });
+      })
+    );
   });
 
   const { getRootProps, getInputProps } = useDropzone({
