@@ -16,7 +16,7 @@ function App(props) {
         <LoadingSpinnerComponent />
         <a
         href="https://github.com/soruly/trace.moe"
-        style={{ fontSize: "15px", paddingTop: '2em'}}
+        style={{ fontSize: "15px", margin:"2em"}}
       >
         https://github.com/soruly/trace.moe
       </a>
