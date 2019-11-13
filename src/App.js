@@ -10,9 +10,9 @@ function App(props) {
       <header className="App-header">
         <h1>Trace.moe</h1>
         <h4>Trace the original anime from a screenshot.</h4>
-        <PaperDropzone props={props} />
+        <PaperDropzone {...props} />
         <h2 style={{ color: "orange" }}>OR</h2>
-        <URLForm props={props}/>
+        <URLForm {...props}/>
         <LoadingSpinnerComponent />
       </header>
     </div>

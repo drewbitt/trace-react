@@ -10,7 +10,7 @@ class URLForm extends React.Component {
     trackPromise(
       searchAnimeWithURL(urlString).then(res => {
         console.log(res);
-        this.props.props.history.push("/results", { results: res });
+        this.props.history.push("/results", { results: res });
       })
     );
   };

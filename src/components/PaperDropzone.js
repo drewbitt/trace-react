@@ -10,7 +10,7 @@ function PaperDropzone(props) {
     trackPromise(
       searchAnime(acceptedFiles).then(res => {
         console.log(res);
-        props.props.history.push("/results", { results: res });
+        props.history.push("/results", { results: res });
       })
     );
   });
