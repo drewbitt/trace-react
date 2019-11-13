@@ -17,7 +17,7 @@ function PaperDropzone(props) {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/jpeg, image/png",
+    accept: "image/jpeg, image/png, image/bmp, image/gif",
     multiple: false
   });
   const { ref, ...rootProps } = getRootProps();

@@ -12,8 +12,14 @@ function App(props) {
         <h4>Trace the original anime from a screenshot.</h4>
         <PaperDropzone {...props} />
         <h2 style={{ color: "orange" }}>OR</h2>
-        <URLForm {...props}/>
+        <URLForm {...props} />
         <LoadingSpinnerComponent />
+        <a
+        href="https://github.com/soruly/trace.moe"
+        style={{ fontSize: "15px", paddingTop: '2em'}}
+      >
+        https://github.com/soruly/trace.moe
+      </a>
       </header>
     </div>
   );
