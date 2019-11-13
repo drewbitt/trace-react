@@ -1,0 +1,23 @@
+.Main{
+    text-align: center;
+  }
+  
+  .Main-header {
+    background-color: #431469;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 1vmin);
+    color: white;
+  }
+  
+  .Main-link {
+    color: #f0f7f5;
+  }
+
+  a {
+      color: lightskyblue;
+  }

@@ -2,7 +2,9 @@ const {
   TRACE_HOST_DOMAIN,
   TRACE_MEDIA_DOMAIN,
   TRACE_HOST_API_DOMAIN,
-  TRACE_SEARCH_QUERY_PATH
+  TRACE_SEARCH_QUERY_PATH,
+  TRACE_SEARCH_QUERY_URL_PATH,
+  REGEX_VALIDATION_URL,
 } = require("./constants");
 
 const axios = require("axios");
@@ -54,6 +56,24 @@ export function searchAnime(files) {
 
     files.forEach(file => reader.readAsDataURL(file));
   });
+}
+
+export function searchAnimeWithURL(url) {
+  if (!REGEX_VALIDATION_URL.test(url)) {
+    return Promise.reject(new Error(`This is URL not valid: ${url}`));
+  }
+  return axios
+    .get(`${TRACE_HOST_API_DOMAIN}${TRACE_SEARCH_QUERY_URL_PATH}` + url)
+    .then(res => {
+      return getSearchResultFromBinding(res.data);
+    })
+    .catch(err => {
+      if (err.response) {
+        throw err.response.data;
+      } else {
+        throw err.message;
+      }
+    });
 }
 
 function SearchResult(
