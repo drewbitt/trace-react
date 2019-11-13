@@ -46,10 +46,9 @@ export function searchAnime(files) {
         })
         .catch(err => {
           if (err.response) {
-            // TODO: need to reject, not just throw?
-            throw err.response.data;
+            reject(err.response.data);
           } else {
-            throw err.message;
+            reject(err.message);
           }
         });
     };
@@ -62,18 +61,21 @@ export function searchAnimeWithURL(url) {
   if (!REGEX_VALIDATION_URL.test(url)) {
     return Promise.reject(new Error(`This is URL not valid: ${url}`));
   }
-  return axios
-    .get(`${TRACE_HOST_API_DOMAIN}${TRACE_SEARCH_QUERY_URL_PATH}` + url)
-    .then(res => {
-      return getSearchResultFromBinding(res.data);
-    })
-    .catch(err => {
-      if (err.response) {
-        throw err.response.data;
-      } else {
-        throw err.message;
-      }
-    });
+
+  return new Promise((resolve, reject) => {
+    return axios
+      .get(`${TRACE_HOST_API_DOMAIN}${TRACE_SEARCH_QUERY_URL_PATH}` + url)
+      .then(res => {
+        resolve(getSearchResultFromBinding(res.data));
+      })
+      .catch(err => {
+        if (err.response) {
+          reject(err.response.data);
+        } else {
+          reject(err.message);
+        }
+      });
+  });
 }
 
 function SearchResult(
