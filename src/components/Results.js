@@ -13,7 +13,7 @@ class Results extends React.Component {
                 Guess #{index + 1}: {item.title_english} - EP: {item.episode} -{" "}
                 <a href={item.imagepreview}>Image Preview</a> -{" "}
                 <a href={item.videopreview}>Video Preview</a> -{" "}
-                <a href={item.naturalvideopreview}>Nautral Video Preview</a>
+                <a href={item.naturalvideopreview}>Natural Video Preview</a>
               </li>
             );
           })}
