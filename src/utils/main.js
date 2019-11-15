@@ -4,7 +4,7 @@ const {
   TRACE_HOST_API_DOMAIN,
   TRACE_SEARCH_QUERY_PATH,
   TRACE_SEARCH_QUERY_URL_PATH,
-  REGEX_VALIDATION_URL,
+  REGEX_VALIDATION_URL
 } = require("./constants");
 
 const axios = require("axios");
