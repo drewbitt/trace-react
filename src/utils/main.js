@@ -23,7 +23,7 @@ export function searchAnime(files) {
 
       // Confirm size less than 10MB after converting to base64
       const buffer = Buffer.from(based.substring(based.indexOf(",") + 1));
-      const bufferSize = Math.floor(buffer.length / 1024 ** (2 ** 2));
+      const bufferSize = Math.floor((buffer.length / 1024 ** 2) * 10);
       if (!bufferSize < 1) {
         return Promise.reject(
           new Error("You should ensure your Base64 encoded image is < 10MB")
